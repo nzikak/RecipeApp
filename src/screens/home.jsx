@@ -1,5 +1,5 @@
-import React, { useState} from "react";
-import { View, StyleSheet, Text, FlatList, Button } from "react-native";
+import React, { useState, useCallback} from "react";
+import { View, StyleSheet, Text, FlatList, Button, ActivityIndicator } from "react-native";
 import getRecipes from "../data/recipe"
 import Card from '../components/card'
 import { useFocusEffect } from "@react-navigation/native";
@@ -9,7 +9,7 @@ const Home = ({ navigation }) => {
 
     const [recipes, setRecipes] = useState([]);
     const [isPremiumUser, setPremiumUser] = useState(false);
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
 
     useFocusEffect(
         useCallback(
