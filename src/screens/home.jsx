@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { View, StyleSheet, Text, FlatList, Button } from "react-native";
 import getRecipes from "../data/recipe"
 import Card from '../components/card'
+import { useFocusEffect } from "@react-navigation/native";
 
 
 const Home = ({ navigation }) => {
 
     const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
-        setRecipes(getRecipes(3));
-        console.log(`Recipe is ${getRecipes()}`);
-    }, [])
+    useFocusEffect(
+        useCallback(
+            () => {
+                if (isPremiumUser) {
+                    setRecipes(getRecipes())
+                } else {
+                    setRecipes(getRecipes(3))
+                }
+            }, [isPremiumUser]
+        )
+
+    );
 
     const clickHandler = (id) => {
         navigation.navigate('Recipe-detail', {
