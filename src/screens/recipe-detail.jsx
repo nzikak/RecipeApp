@@ -53,10 +53,12 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
+        color: '#333',
         marginBottom: 10
     },
     text: {
         fontSize: 16,
+        color: '#333',
         textAlign: 'justify'
     }
 
