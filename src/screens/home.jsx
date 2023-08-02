@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { View, StyleSheet, Text, FlatList, Button, ActivityIndicator } from "react-native";
 import getRecipes from "../data/recipe"
@@ -6,19 +6,15 @@ import Card from '../components/card'
 import { getAvailablePurchases } from "react-native-iap";
 import { constants } from "../utils/constants";
 
-var count = 0;
-
 const Home = ({ navigation }) => {
 
     const [recipes, setRecipes] = useState([]);
-    // const {purchaseHistory} = useIAP();
     const [isPremiumUser, setPremiumUser] = useState(false);
     const [isLoading, setLoading] = useState(true);
 
     useFocusEffect(
         useCallback(
             () => {
-                count++;
                 if (isPremiumUser) {
                     setRecipes(getRecipes())
                 } else {

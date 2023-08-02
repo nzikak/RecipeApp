@@ -2,26 +2,25 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Image, Alert, ActivityIndicator } from "react-native";
 import { constants } from "../utils/constants";
 import {
-    getProducts,
-    Product,
-    requestPurchase,
-    purchaseUpdatedListener,
-    purchaseErrorListener,
-    finishTransaction
+    getProducts, //For fetching available products
+    requestPurchase, //For initiating in-app purchases
+    purchaseUpdatedListener, //For listening to purchase events
+    purchaseErrorListener, //For listening to purchase errors
+    finishTransaction  //For acknowledging a purchase
 } from "react-native-iap";
-import ProductItem from "../components/product-item";
+import ProductItem from "../components/productItem";
 
 
 const backgroundImage = require('../assets/recipe.jpg')
 
 const Paywall = ({ navigation }) => {
 
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
 
-        const purchaseUpdate = purchaseUpdatedListener(
+        const purchaseUpdateSubscription = purchaseUpdatedListener(
             async (purchase) => {
                 const receipt = purchase.transactionReceipt;
 
@@ -35,7 +34,7 @@ const Paywall = ({ navigation }) => {
                 }
             });
 
-        const purchaseError = purchaseErrorListener((error) =>
+        const purchaseErrorSubscription = purchaseErrorListener((error) =>
             console.error('Purchase error', error.message));
 
         const fetchProducts = async () => {
@@ -53,12 +52,12 @@ const Paywall = ({ navigation }) => {
         fetchProducts();
 
         return () => {
-            purchaseUpdate.remove();
-            purchaseError.remove();
+            purchaseUpdateSubscription.remove();
+            purchaseErrorSubscription.remove();
         }
 
 
-    }, [])
+    }, []);
 
     const notifySuccessfulPurchase = () => {
         Alert.alert("Success", "Purchase successful", [

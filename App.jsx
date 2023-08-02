@@ -4,13 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/screens/home';
 import Paywall from './src/screens/paywall';
-import RecipeDetail from './src/screens/recipe-detail';
+import RecipeDetail from './src/screens/recipeDetail';
 import {
   initConnection,
   endConnection,
   flushFailedPurchasesCachedAsPendingAndroid,
 } from 'react-native-iap';
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
 
 
 const Stack = createNativeStackNavigator();
