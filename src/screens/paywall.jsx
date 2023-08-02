@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, Image } from "react-native";
 
 const backgroundImage = require('../assets/recipe.jpg')
 
-const Paywall = () => {
+const Paywall = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#333',
         overflow: 'hidden'
+    },
+    indicator: {
+        justifyContent: 'center',
+        flex: 1
     }
 });
 
