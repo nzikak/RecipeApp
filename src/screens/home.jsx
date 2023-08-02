@@ -8,6 +8,8 @@ import { useFocusEffect } from "@react-navigation/native";
 const Home = ({ navigation }) => {
 
     const [recipes, setRecipes] = useState([]);
+    const [isPremiumUser, setPremiumUser] = useState(false);
+    const [isLoading, setLoading] = useState(true);
 
     useFocusEffect(
         useCallback(
@@ -34,21 +36,29 @@ const Home = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <FlatList
-                data={recipes}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <Card onPress={() => clickHandler(item.id)}>
-                        <Text style={styles.item}>{item.name}
-                        </Text>
-                    </Card>)}
-            />
-            <View style={styles.button}>
-                <Button 
-                onPress={onNavigate}
-                title='Unlock All Recipes'
-                color='coral'/>
-                </View>
+            {!isLoading ? (
+                <>
+                    <FlatList
+                        data={recipes}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => (
+                            <Card onPress={() => clickHandler(item.id)}>
+                                <Text style={styles.item}>{item.name}
+                                </Text>
+                            </Card>)}
+                    />
+                    {!isPremiumUser && <View style={styles.button}>
+                        <Button
+                            onPress={onNavigate}
+                            title='Unlock All Recipes'
+                            color='coral' />
+                    </View>}
+                </>
+            )
+                : <View style={styles.indicator}>
+                    <ActivityIndicator size='large' />
+                    </View>
+                    }
         </View>
     )
 }
@@ -62,10 +72,15 @@ const styles = StyleSheet.create({
     },
     item: {
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 18,
+        color: '#333'
     },
     button: {
         marginTop: 20
+    },
+    indicator: {
+        alignSelf: 'center',
+        flex: 1
     }
 });
 
