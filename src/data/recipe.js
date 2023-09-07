@@ -22,10 +22,9 @@ const getRecipes = (count) => {
         new Recipe(
             2,
             'Baked Hash Browns',
-            `Mix together and put in 9 x 13 lightly greased pan. Sprinkle with paprika.
-            Bake 350 degrees for 1 1/2 hours.`,
+            `Mix together and put in 9 x 13 lightly greased pan. Sprinkle with paprika. Bake 350 degrees for 1 1/2 hours.`,
             [
-                '1 package 32) Cubed Frozen Hash Brown Potatoes',
+                '1 package of Cubed Frozen Hash Brown Potatoes',
                 '2 cans cream of potato soup',
                 '1 can cream of celery soup',
                 '1 - 16 ounce container of Sour Cream',

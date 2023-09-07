@@ -26,11 +26,14 @@ const Paywall = ({ navigation }) => {
 
                 if (receipt) {
                     try {
-                        await finishTransaction({ purchase, isConsumable: false });
+                        await finishTransaction({ 
+                            purchase: purchase, 
+                            isConsumable: false,
+                         });
+                         notifySuccessfulPurchase();
                     } catch (error) {
-                        console.error("An error occurred while completing transaction", error);
+                        
                     }
-                    notifySuccessfulPurchase();
                 }
             });
 
@@ -69,14 +72,10 @@ const Paywall = ({ navigation }) => {
     }
 
     const handlePurchase = async (productId) => {
-        setPurchaseLoading(true)
         try {
             await requestPurchase({ skus: [productId] });
         } catch (error) {
             Alert.alert('Error occurred while making purchase')
-        }
-        finally {
-            setLoading(false);
         }
     }
 
